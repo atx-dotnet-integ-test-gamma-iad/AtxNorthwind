@@ -1,0 +1,44 @@
+{
+  "Settings": {
+    "EnableRazorViews": false,
+    "ExcludePortNetStandard": false,
+    "EnableDbMod": true
+  },
+  "projects": [],
+  "DatabaseSettings": {
+    "Databases": [
+      {
+        "Source": {
+          "DatabaseName": "Northwind"
+        },
+        "Target": {
+          "DatabaseName": "northwind"
+        },
+        "Tools": [
+          {
+            "Name": "DMS",
+            "Properties": {
+              "DmsArn": null
+            }
+          },
+          {
+            "Name": "DDL",
+            "Properties": {
+              "Artifacts": [
+                {
+                  "DatabaseName": "Northwind",
+                  "Properties": [
+                    { "Name": "Source", "Value": "LOCAL_FILE" },
+                    { "Name": "Target", "Value": "LOCAL_FILE" },
+                    { "Name": "ValidationReport", "Value": "LOCAL_FILE" },
+                    { "Name": "TargetDatabaseSecretName", "Value": "atx-db-modernization-secret-pg-admin" }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
