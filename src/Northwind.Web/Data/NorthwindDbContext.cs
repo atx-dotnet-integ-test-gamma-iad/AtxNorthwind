@@ -1,3 +1,4 @@
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Web.Models;
 
@@ -5,6 +6,11 @@ namespace Northwind.Web.Data;
 
 public class NorthwindDbContext : DbContext
 {
+    static NorthwindDbContext()
+    {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
+
     public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options) : base(options) { }
 
     public DbSet<Category> Categories { get; set; }
@@ -33,6 +39,10 @@ public class NorthwindDbContext : DbContext
             .WithMany(s => s.Products)
             .HasForeignKey(p => p.SupplierID)
             .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Product>()
+            .Property(e => e.Discontinued)
+            .HasConversion<int>();
 
         modelBuilder.Entity<OrderDetail>()
             .HasKey(od => new { od.OrderID, od.ProductID });
