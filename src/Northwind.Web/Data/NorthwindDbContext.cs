@@ -1,3 +1,4 @@
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Web.Models;
 
@@ -5,6 +6,11 @@ namespace Northwind.Web.Data;
 
 public class NorthwindDbContext : DbContext
 {
+    static NorthwindDbContext()
+    {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
+
     public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options) : base(options) { }
 
     public DbSet<Category> Categories { get; set; }
@@ -16,6 +22,40 @@ public class NorthwindDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // --- Table & Schema Mappings (PostgreSQL: northwind_dbo schema) ---
+        modelBuilder.Entity<Category>(entity =>
+        {
+            entity.ToTable("categories", "northwind_dbo");
+        });
+
+        modelBuilder.Entity<Customer>(entity =>
+        {
+            entity.ToTable("customers", "northwind_dbo");
+        });
+
+        modelBuilder.Entity<Supplier>(entity =>
+        {
+            entity.ToTable("suppliers", "northwind_dbo");
+        });
+
+        modelBuilder.Entity<Product>(entity =>
+        {
+            entity.ToTable("products", "northwind_dbo");
+            // bool -> int conversion required for PostgreSQL provider compatibility
+            entity.Property(p => p.Discontinued).HasConversion<int>();
+        });
+
+        modelBuilder.Entity<Order>(entity =>
+        {
+            entity.ToTable("orders", "northwind_dbo");
+        });
+
+        modelBuilder.Entity<OrderDetail>(entity =>
+        {
+            entity.ToTable("orderdetails", "northwind_dbo");
+        });
+
+        // --- Relationships & Constraints (preserved unchanged) ---
         modelBuilder.Entity<Customer>()
             .HasMany(c => c.Orders)
             .WithOne(o => o.Customer)
