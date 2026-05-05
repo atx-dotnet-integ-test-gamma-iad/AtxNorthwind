@@ -1,10 +1,17 @@
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Web.Models;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 namespace Northwind.Web.Data;
 
 public class NorthwindDbContext : DbContext
 {
+    static NorthwindDbContext()
+    {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
+
     public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options) : base(options) { }
 
     public DbSet<Category> Categories { get; set; }
@@ -16,6 +23,10 @@ public class NorthwindDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasDefaultSchema("northwind_dbo");
+
+        // ── Relationships ────────────────────────────────────────────────────
+
         modelBuilder.Entity<Customer>()
             .HasMany(c => c.Orders)
             .WithOne(o => o.Customer)
@@ -48,6 +59,12 @@ public class NorthwindDbContext : DbContext
             .WithMany(p => p.OrderDetails)
             .HasForeignKey(od => od.ProductID)
             .OnDelete(DeleteBehavior.Restrict);
+
+        // ── Bool conversions (PostgreSQL does not use BIT; store as int) ─────
+
+        modelBuilder.Entity<Product>()
+            .Property(e => e.Discontinued)
+            .HasConversion<int>();
 
         base.OnModelCreating(modelBuilder);
     }
