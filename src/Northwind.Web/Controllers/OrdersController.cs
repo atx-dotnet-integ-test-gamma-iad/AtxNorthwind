@@ -1,8 +1,9 @@
-using System.Data.SqlClient;
+using Npgsql;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Web.Data;
 using Northwind.Web.Models;
+using System.Threading.Tasks;
 
 namespace Northwind.Web.Controllers;
 
@@ -21,7 +22,7 @@ public class OrdersController : ControllerBase
     public async Task<IActionResult> GetAllOrders()
     {
         var orders = await _context.Database
-            .SqlQueryRaw<Order>("SELECT * FROM Orders WHERE OrderDate >= GETDATE() - 30")
+            .SqlQueryRaw<Order>("SELECT * FROM northwind_dbo.orders WHERE OrderDate >= CURRENT_TIMESTAMP - INTERVAL '30 days'")
             .ToListAsync();
         return Ok(orders);
     }
@@ -29,10 +30,10 @@ public class OrdersController : ControllerBase
     [HttpGet("by-customer/{customerId}")]
     public async Task<IActionResult> GetOrdersByCustomer(string customerId)
     {
-        var param = new SqlParameter("@CustomerID", customerId);
+        var param = new NpgsqlParameter("@CustomerID", customerId);
         var orders = await _context.Database
             .SqlQueryRaw<Order>(
-                "SELECT *, DATEDIFF(DAY, OrderDate, GETDATE()) AS DaysAgo FROM Orders WHERE CustomerID = @CustomerID",
+                "SELECT *, (CURRENT_DATE - OrderDate::date) AS DaysAgo FROM northwind_dbo.orders WHERE CustomerID = @CustomerID",
                 param)
             .ToListAsync();
         return Ok(orders);
@@ -41,10 +42,12 @@ public class OrdersController : ControllerBase
     [HttpGet("history/{customerId}")]
     public async Task<IActionResult> GetCustomerOrderHistory(string customerId)
     {
-        var param = new SqlParameter("@CustomerID", customerId);
+        var param = new NpgsqlParameter("@CustomerID", customerId);
+        // TODO: Manual migration required - Stored procedure call detected.
+        // This stored procedure needs to be migrated to PostgreSQL and this call updated accordingly.
         var result = await _context.Database
             .SqlQueryRaw<OrderHistoryResult>(
-                "EXEC [dbo].[CustOrderHist] @CustomerID",
+                "SELECT * FROM northwind_dbo.custorderhist(@CustomerID)",
                 param)
             .ToListAsync();
         return Ok(result);
@@ -55,9 +58,9 @@ public class OrdersController : ControllerBase
     {
         var orders = await _context.Database
             .SqlQueryRaw<Order>(
-                "SELECT *, FORMAT(OrderDate, 'yyyy-MM-dd') AS FormattedDate, " +
-                "DATEPART(YEAR, OrderDate) AS OrderYear " +
-                "FROM Orders WHERE ShippedDate IS NOT NULL")
+                "SELECT *, TO_CHAR(OrderDate, 'YYYY-MM-DD') AS FormattedDate, " +
+                "EXTRACT(YEAR FROM OrderDate)::INTEGER AS OrderYear " +
+                "FROM northwind_dbo.orders WHERE ShippedDate IS NOT NULL")
             .ToListAsync();
         return Ok(orders);
     }
