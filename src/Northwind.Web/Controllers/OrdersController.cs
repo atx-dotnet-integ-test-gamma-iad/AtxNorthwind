@@ -1,4 +1,5 @@
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Web.Data;
@@ -21,7 +22,7 @@ public class OrdersController : ControllerBase
     public async Task<IActionResult> GetAllOrders()
     {
         var orders = await _context.Database
-            .SqlQueryRaw<Order>("SELECT * FROM Orders WHERE OrderDate >= GETDATE() - 30")
+            .SqlQueryRaw<Order>("SELECT * FROM Orders WHERE OrderDate >= CURRENT_TIMESTAMP - 30")
             .ToListAsync();
         return Ok(orders);
     }
@@ -32,7 +33,7 @@ public class OrdersController : ControllerBase
         var param = new SqlParameter("@CustomerID", customerId);
         var orders = await _context.Database
             .SqlQueryRaw<Order>(
-                "SELECT *, DATEDIFF(DAY, OrderDate, GETDATE()) AS DaysAgo FROM Orders WHERE CustomerID = @CustomerID",
+                "SELECT *, CAST(EXTRACT(epoch FROM CAST(CAST(CURRENT_TIMESTAMP AS TIMESTAMP) AS TIMESTAMP) - CAST(CAST(OrderDate AS TIMESTAMP) AS TIMESTAMP)) / 86400 AS BIGINT) AS DaysAgo FROM Orders WHERE CustomerID = @CustomerID",
                 param)
             .ToListAsync();
         return Ok(orders);
@@ -42,6 +43,8 @@ public class OrdersController : ControllerBase
     public async Task<IActionResult> GetCustomerOrderHistory(string customerId)
     {
         var param = new SqlParameter("@CustomerID", customerId);
+        // TODO: Manual migration required - Stored procedure call detected.
+        // This stored procedure needs to be migrated to PostgreSQL and this call updated accordingly.
         var result = await _context.Database
             .SqlQueryRaw<OrderHistoryResult>(
                 "EXEC [dbo].[CustOrderHist] @CustomerID",
@@ -55,9 +58,9 @@ public class OrdersController : ControllerBase
     {
         var orders = await _context.Database
             .SqlQueryRaw<Order>(
-                "SELECT *, FORMAT(OrderDate, 'yyyy-MM-dd') AS FormattedDate, " +
-                "DATEPART(YEAR, OrderDate) AS OrderYear " +
-                "FROM Orders WHERE ShippedDate IS NOT NULL")
+                "SELECT *, TO_CHAR(OrderDate, 'YYYY-MM-DD') AS FormattedDate, " +
+                "TO_CHAR(CAST(OrderDate AS TIMESTAMP), 'YYYY') AS OrderYear " +
+                "FROM Orders WHERE NOT ShippedDate IS NULL")
             .ToListAsync();
         return Ok(orders);
     }
