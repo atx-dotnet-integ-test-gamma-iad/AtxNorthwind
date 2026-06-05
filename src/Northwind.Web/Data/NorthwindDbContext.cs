@@ -1,3 +1,4 @@
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Web.Models;
 
@@ -5,6 +6,11 @@ namespace Northwind.Web.Data;
 
 public class NorthwindDbContext : DbContext
 {
+    static NorthwindDbContext()
+    {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
+
     public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options) : base(options) { }
 
     public DbSet<Category> Categories { get; set; }
@@ -16,6 +22,14 @@ public class NorthwindDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasDefaultSchema("northwind_dbo");
+
+        // ── bool → int conversions for PostgreSQL NUMERIC(1,0) compatibility ──
+        modelBuilder.Entity<Product>()
+            .Property(p => p.Discontinued)
+            .HasConversion<int>();
+
+        // ── Relationships ──
         modelBuilder.Entity<Customer>()
             .HasMany(c => c.Orders)
             .WithOne(o => o.Customer)
