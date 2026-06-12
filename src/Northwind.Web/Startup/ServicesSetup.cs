@@ -1,6 +1,9 @@
-using System.Data.SqlClient;
+using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Northwind.Web.Data;
+using Npgsql;
 
 namespace Northwind.Web.Startup;
 
@@ -11,22 +14,21 @@ public static class ServicesSetup
         services.AddControllers();
 
         services.AddDbContext<NorthwindDbContext>(option =>
-            option.UseSqlServer(GetDatabaseConnectionString(configuration)));
+            option.UseNpgsql(GetDatabaseConnectionString(configuration)));
     }
 
     private static string GetDatabaseConnectionString(ConfigurationManager configuration)
     {
         var secretName = configuration["dbsecretsname"] ?? "atx-db-modernization-secret-sql-admin";
 
-        var builder = new SqlConnectionStringBuilder
+        var builder = new NpgsqlConnectionStringBuilder
         {
-            DataSource = "myserver.database.windows.net",
-            InitialCatalog = "Northwind",
-            IntegratedSecurity = false,
-            MultipleActiveResultSets = true,
-            TrustServerCertificate = true,
-            UserID = "admin",
-            Password = "placeholder"
+            Host = configuration["DatabaseSettings:Host"] ?? "myserver.postgres.database.azure.com",
+            Database = configuration["DatabaseSettings:Database"] ?? "Northwind",
+            Username = configuration["DatabaseSettings:Username"] ?? "admin",
+            Password = configuration["DatabaseSettings:Password"] ?? "placeholder",
+            SslMode = SslMode.Require,
+            TrustServerCertificate = true
         };
 
         return builder.ConnectionString;
