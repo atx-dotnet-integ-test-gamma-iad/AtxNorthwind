@@ -1,31 +1,39 @@
-using System.Data.SqlClient;
+using System;
+using Npgsql;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Northwind.Web.Data;
 
 namespace Northwind.Web.Startup;
 
 public static class ServicesSetup
 {
+    static ServicesSetup()
+    {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
+
     public static void ConfigureServices(IServiceCollection services, ConfigurationManager configuration)
     {
         services.AddControllers();
 
         services.AddDbContext<NorthwindDbContext>(option =>
-            option.UseSqlServer(GetDatabaseConnectionString(configuration)));
+            option.UseNpgsql(GetDatabaseConnectionString(configuration)));
     }
 
     private static string GetDatabaseConnectionString(ConfigurationManager configuration)
     {
         var secretName = configuration["dbsecretsname"] ?? "atx-db-modernization-secret-sql-admin";
 
-        var builder = new SqlConnectionStringBuilder
+        var builder = new NpgsqlConnectionStringBuilder
         {
-            DataSource = "myserver.database.windows.net",
-            InitialCatalog = "Northwind",
-            IntegratedSecurity = false,
-            MultipleActiveResultSets = true,
+            Host = "myserver.database.windows.net",
+            Database = "Northwind",
+            Multiplexing = true,
             TrustServerCertificate = true,
-            UserID = "admin",
+            Username = "admin",
             Password = "placeholder"
         };
 
