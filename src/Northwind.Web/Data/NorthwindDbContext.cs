@@ -1,3 +1,4 @@
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Web.Models;
 
@@ -5,6 +6,11 @@ namespace Northwind.Web.Data;
 
 public class NorthwindDbContext : DbContext
 {
+    static NorthwindDbContext()
+    {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
+
     public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options) : base(options) { }
 
     public DbSet<Category> Categories { get; set; }
@@ -16,11 +22,24 @@ public class NorthwindDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // -------------------------------------------------------
+        // Table → schema mappings (northwind_dbo)
+        // -------------------------------------------------------
+        modelBuilder.Entity<Category>()
+            .ToTable("categories", "northwind_dbo");
+
         modelBuilder.Entity<Customer>()
+            .ToTable("customers", "northwind_dbo")
             .HasMany(c => c.Orders)
             .WithOne(o => o.Customer)
             .HasForeignKey(o => o.CustomerID)
             .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Supplier>()
+            .ToTable("suppliers", "northwind_dbo");
+
+        modelBuilder.Entity<Product>()
+            .ToTable("products", "northwind_dbo");
 
         modelBuilder.Entity<Product>()
             .HasOne(p => p.Category)
@@ -33,6 +52,12 @@ public class NorthwindDbContext : DbContext
             .WithMany(s => s.Products)
             .HasForeignKey(p => p.SupplierID)
             .OnDelete(DeleteBehavior.Restrict);
+
+        modelBuilder.Entity<Order>()
+            .ToTable("orders", "northwind_dbo");
+
+        modelBuilder.Entity<OrderDetail>()
+            .ToTable("orderdetails", "northwind_dbo");
 
         modelBuilder.Entity<OrderDetail>()
             .HasKey(od => new { od.OrderID, od.ProductID });
@@ -48,6 +73,13 @@ public class NorthwindDbContext : DbContext
             .WithMany(p => p.OrderDetails)
             .HasForeignKey(od => od.ProductID)
             .OnDelete(DeleteBehavior.Restrict);
+
+        // -------------------------------------------------------
+        // bool → int conversions required by Npgsql
+        // -------------------------------------------------------
+        modelBuilder.Entity<Product>()
+            .Property(e => e.Discontinued)
+            .HasConversion<int>();
 
         base.OnModelCreating(modelBuilder);
     }
