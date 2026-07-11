@@ -1,5 +1,7 @@
 using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Northwind.Web.Data;
 
 namespace Northwind.Web.Startup;
