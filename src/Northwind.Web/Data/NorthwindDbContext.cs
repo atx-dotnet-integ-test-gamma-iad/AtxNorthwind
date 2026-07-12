@@ -1,3 +1,4 @@
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Web.Models;
 
@@ -5,6 +6,11 @@ namespace Northwind.Web.Data;
 
 public class NorthwindDbContext : DbContext
 {
+    static NorthwindDbContext()
+    {
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+    }
+
     public NorthwindDbContext(DbContextOptions<NorthwindDbContext> options) : base(options) { }
 
     public DbSet<Category> Categories { get; set; }
@@ -16,6 +22,37 @@ public class NorthwindDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // ---------------------------------------------------------
+        // Table mappings: dbo schema (MSSQL) -> northwind_dbo (PostgreSQL)
+        // ---------------------------------------------------------
+        modelBuilder.Entity<Category>()
+            .ToTable("categories", "northwind_dbo");
+
+        modelBuilder.Entity<Customer>()
+            .ToTable("customers", "northwind_dbo");
+
+        modelBuilder.Entity<Supplier>()
+            .ToTable("suppliers", "northwind_dbo");
+
+        modelBuilder.Entity<Product>()
+            .ToTable("products", "northwind_dbo");
+
+        modelBuilder.Entity<Order>()
+            .ToTable("orders", "northwind_dbo");
+
+        modelBuilder.Entity<OrderDetail>()
+            .ToTable("orderdetails", "northwind_dbo");
+
+        // ---------------------------------------------------------
+        // Bool -> int conversions (PostgreSQL compatibility)
+        // ---------------------------------------------------------
+        modelBuilder.Entity<Product>()
+            .Property(e => e.Discontinued)
+            .HasConversion<int>();
+
+        // ---------------------------------------------------------
+        // Relationships (preserved exactly as original)
+        // ---------------------------------------------------------
         modelBuilder.Entity<Customer>()
             .HasMany(c => c.Orders)
             .WithOne(o => o.Customer)
