@@ -4,23 +4,21 @@
     "ExcludePortNetStandard": false,
     "EnableDbMod": true
   },
-  "projects": [],
+  "solutions": [
+    {
+      "solutionName": "Northwind",
+      "projects": []
+    }
+  ],
   "DatabaseSettings": {
     "Databases": [
       {
         "Source": {
-          "DatabaseName": "Northwind"
+          "DatabaseName": "Northwind",
+          "DatabaseVersion": 2019
         },
-        "Target": {
-          "DatabaseName": "northwind"
-        },
+        "Target": { "DatabaseName": "postgres", "DatabaseVersion": 13 },
         "Tools": [
-          {
-            "Name": "DMS",
-            "Properties": {
-              "DmsArn": null
-            }
-          },
           {
             "Name": "DDL",
             "Properties": {
@@ -28,10 +26,9 @@
                 {
                   "DatabaseName": "Northwind",
                   "Properties": [
-                    { "Name": "Source", "Value": "LOCAL_FILE" },
-                    { "Name": "Target", "Value": "LOCAL_FILE" },
-                    { "Name": "ValidationReport", "Value": "LOCAL_FILE" },
-                    { "Name": "TargetDatabaseSecretName", "Value": "atx-db-modernization-secret-pg-admin" }
+                    { "Name": "Source", "Value": "0e7d7625-9cc9-43da-b906-49dbe0015352" },
+                    { "Name": "Target", "Value": "c623dc2e-f986-4751-8e96-74ebda3cd22c" },
+                    { "Name": "ValidationReport", "Value": "4257f1d3-984c-47e1-849c-505ad9f7cafc" }
                   ]
                 }
               ]
