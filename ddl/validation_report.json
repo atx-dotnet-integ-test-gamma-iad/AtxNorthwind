@@ -1,0 +1,1064 @@
+{
+  "metadata": {
+    "timestamp": "20260409_035039",
+    "mssql_schema": "test/resources/ddl/northwind/source_mssql.sql",
+    "postgres_schema": "test/resources/ddl/northwind/target_postgres.sql",
+    "overall_status": "FAIL",
+    "summary": {
+      "total_checks": 98,
+      "passed": 97,
+      "failed": 1,
+      "warnings": 0,
+      "errors": 0
+    }
+  },
+  "validators": {
+    "TableValidator": {
+      "validator_name": "TableValidator",
+      "status": "FAIL",
+      "total_checks": 6,
+      "passed": 5,
+      "failed": 1,
+      "results": [
+        {
+          "validator_name": "TableValidator",
+          "object_type": "table",
+          "object_name": "categories",
+          "status": "PASS",
+          "message": "Table exists in target",
+          "mssql_value": "dbo.Categories",
+          "postgres_value": "northwind_dbo.categories",
+          "details": {}
+        },
+        {
+          "validator_name": "TableValidator",
+          "object_type": "table",
+          "object_name": "customers",
+          "status": "PASS",
+          "message": "Table exists in target",
+          "mssql_value": "dbo.Customers",
+          "postgres_value": "northwind_dbo.customers",
+          "details": {}
+        },
+        {
+          "validator_name": "TableValidator",
+          "object_type": "table",
+          "object_name": "orderdetails",
+          "status": "PASS",
+          "message": "Table exists in target",
+          "mssql_value": "dbo.OrderDetails",
+          "postgres_value": "northwind_dbo.orderdetails",
+          "details": {}
+        },
+        {
+          "validator_name": "TableValidator",
+          "object_type": "table",
+          "object_name": "orders",
+          "status": "PASS",
+          "message": "Table exists in target",
+          "mssql_value": "dbo.Orders",
+          "postgres_value": "northwind_dbo.orders",
+          "details": {}
+        },
+        {
+          "validator_name": "TableValidator",
+          "object_type": "table",
+          "object_name": "products",
+          "status": "FAIL",
+          "message": "Table not found in target",
+          "mssql_value": "dbo.Products",
+          "postgres_value": null,
+          "details": {}
+        },
+        {
+          "validator_name": "TableValidator",
+          "object_type": "table",
+          "object_name": "suppliers",
+          "status": "PASS",
+          "message": "Table exists in target",
+          "mssql_value": "dbo.Suppliers",
+          "postgres_value": "northwind_dbo.suppliers",
+          "details": {}
+        }
+      ]
+    },
+    "ColumnValidator": {
+      "validator_name": "ColumnValidator",
+      "status": "PASS",
+      "total_checks": 46,
+      "passed": 46,
+      "failed": 0,
+      "results": [
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.categories.categoryid",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "int",
+          "postgres_value": "integer",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.categories.categoryname",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.categories.description",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "ntext",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.categories.picture",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "image",
+          "postgres_value": "bytea,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.customerid",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nchar(5)",
+          "postgres_value": "public.citext",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.companyname",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(40)",
+          "postgres_value": "public.citext",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.contactname",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(30)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.contacttitle",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(30)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.address",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(60)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.city",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.region",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.postalcode",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(10)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.country",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.phone",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(24)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.fax",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(24)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orderdetails.orderid",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "int",
+          "postgres_value": "integer",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orderdetails.productid",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "int",
+          "postgres_value": "integer",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orderdetails.unitprice",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "money",
+          "postgres_value": "numeric(19,4)",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orderdetails.quantity",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "smallint",
+          "postgres_value": "smallint",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orderdetails.discount",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "real",
+          "postgres_value": "double",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.orderid",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "int",
+          "postgres_value": "integer",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.customerid",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nchar(5)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.employeeid",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "int",
+          "postgres_value": "integer,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.orderdate",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "datetime",
+          "postgres_value": "timestamp",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.requireddate",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "datetime",
+          "postgres_value": "timestamp",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shippeddate",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "datetime",
+          "postgres_value": "timestamp",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shipvia",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "int",
+          "postgres_value": "integer,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.freight",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "money",
+          "postgres_value": "numeric(19,4)",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shipname",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(40)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shipaddress",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(60)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shipcity",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shipregion",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shippostalcode",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(10)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shipcountry",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.supplierid",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "int",
+          "postgres_value": "integer",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.companyname",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(40)",
+          "postgres_value": "public.citext",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.contactname",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(30)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.contacttitle",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(30)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.address",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(60)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.city",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.region",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.postalcode",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(10)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.country",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.phone",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(24)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.fax",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "nvarchar(24)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "ColumnValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.homepage",
+          "status": "PASS",
+          "message": "Column exists in target",
+          "mssql_value": "ntext",
+          "postgres_value": "public.citext,",
+          "details": {}
+        }
+      ]
+    },
+    "TypeMappingValidator": {
+      "validator_name": "TypeMappingValidator",
+      "status": "PASS",
+      "total_checks": 46,
+      "passed": 46,
+      "failed": 0,
+      "results": [
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.categories.categoryid",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "int",
+          "postgres_value": "integer",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.categories.categoryname",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.categories.description",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "ntext",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.categories.picture",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "image",
+          "postgres_value": "bytea,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.customerid",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nchar(5)",
+          "postgres_value": "public.citext",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.companyname",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(40)",
+          "postgres_value": "public.citext",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.contactname",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(30)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.contacttitle",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(30)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.address",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(60)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.city",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.region",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.postalcode",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(10)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.country",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.phone",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(24)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.customers.fax",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(24)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orderdetails.orderid",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "int",
+          "postgres_value": "integer",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orderdetails.productid",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "int",
+          "postgres_value": "integer",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orderdetails.unitprice",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "money",
+          "postgres_value": "numeric(19,4)",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orderdetails.quantity",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "smallint",
+          "postgres_value": "smallint",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orderdetails.discount",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "real",
+          "postgres_value": "double",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.orderid",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "int",
+          "postgres_value": "integer",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.customerid",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nchar(5)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.employeeid",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "int",
+          "postgres_value": "integer,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.orderdate",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "datetime",
+          "postgres_value": "timestamp",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.requireddate",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "datetime",
+          "postgres_value": "timestamp",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shippeddate",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "datetime",
+          "postgres_value": "timestamp",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shipvia",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "int",
+          "postgres_value": "integer,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.freight",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "money",
+          "postgres_value": "numeric(19,4)",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shipname",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(40)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shipaddress",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(60)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shipcity",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shipregion",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shippostalcode",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(10)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.orders.shipcountry",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.supplierid",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "int",
+          "postgres_value": "integer",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.companyname",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(40)",
+          "postgres_value": "public.citext",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.contactname",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(30)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.contacttitle",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(30)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.address",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(60)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.city",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.region",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.postalcode",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(10)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.country",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(15)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.phone",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(24)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.fax",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "nvarchar(24)",
+          "postgres_value": "public.citext,",
+          "details": {}
+        },
+        {
+          "validator_name": "TypeMappingValidator",
+          "object_type": "column",
+          "object_name": "northwind_dbo.suppliers.homepage",
+          "status": "PASS",
+          "message": "Data type mapping is valid",
+          "mssql_value": "ntext",
+          "postgres_value": "public.citext,",
+          "details": {}
+        }
+      ]
+    },
+    "ViewValidator": {
+      "validator_name": "ViewValidator",
+      "status": "PASS",
+      "total_checks": 0,
+      "passed": 0,
+      "failed": 0,
+      "results": []
+    },
+    "RoutineValidator": {
+      "validator_name": "RoutineValidator",
+      "status": "PASS",
+      "total_checks": 0,
+      "passed": 0,
+      "failed": 0,
+      "results": []
+    },
+    "IndexValidator": {
+      "validator_name": "IndexValidator",
+      "status": "PASS",
+      "total_checks": 0,
+      "passed": 0,
+      "failed": 0,
+      "results": []
+    },
+    "ConstraintValidator": {
+      "validator_name": "ConstraintValidator",
+      "status": "PASS",
+      "total_checks": 0,
+      "passed": 0,
+      "failed": 0,
+      "results": []
+    },
+    "TriggerValidator": {
+      "validator_name": "TriggerValidator",
+      "status": "PASS",
+      "total_checks": 0,
+      "passed": 0,
+      "failed": 0,
+      "results": []
+    }
+  }
+}
